@@ -7,6 +7,26 @@
      * Date: 4/2/19
      * Time: 2:01 PM
      */
+
+    /**
+     * Route: /admin/courses
+     *
+     * Controller: /app/Http/Controllers/admin/masterCourseController.php
+     *
+     * Function: masterCourseController@index
+     *
+     * Variables:
+     *      $courses
+     *          - Json from all master_courses
+     *              * this is displayed in the table
+     *
+     * Form: Edits a master course entry and updates it to the database
+     *      Call: Put
+     *      Route: /admin/courses/{id_master}
+     *      Controller: /app/Http/Controllers/admin/masterCourseController.php
+     *      Function: masterCourseController@update
+     *
+     */
     ?>
 
     {{ Breadcrumbs::render('Master Courses')}}
@@ -29,7 +49,7 @@
         </thead>
         <tbody>
         @foreach($courses as $course)
-            {!! Form::model($course, array('route' => ['courses.update', $course->id_master], 'method'=>'put')) !!}
+            {!! Form::model($course, array('route' => ['admin.courses.update', $course->id_master], 'method'=>'put')) !!}
             <tr>
                 <td scope="row">{{$course->id_master}}</td>
                 <td>{{Form::text('courseDepartment', $course->courseDepartment,array('class'=>'form-control'))}}</td>

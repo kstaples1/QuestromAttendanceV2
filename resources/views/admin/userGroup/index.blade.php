@@ -1,3 +1,24 @@
+<?php
+/**
+ * Route: /admin/usergroup
+ *
+ * Controller: /app/Http/Controllers/admin/userGroupController.php
+ *
+ * Function: userGroupController@index
+ *
+ * Variables:
+ *      $userGroups
+ *          - Json from all user_groups
+ *              * this is displayed in the table
+ *
+ * Form: Updates a user group entry
+ *      Call: Put
+ *      Route: /admin/usergroup/{id_userGroup}
+ *      Controller: /app/Http/Controllers/admin/userGroupController.php
+ *      Function: userGroupController@update
+ *
+ */
+?>
 @extends('layouts.app')
 @section('content')
 
@@ -19,7 +40,7 @@
             </thead>
             <tbody>
             @foreach($userGroups as $userGroup)
-                {!! Form::model($userGroup, array('route' => ['usergroup.update', $userGroup->id_userGroup], 'method'=>'put')) !!}
+                {!! Form::model($userGroup, array('route' => ['admin.usergroup.update', $userGroup->id_userGroup], 'method'=>'put')) !!}
                 <tr>
                     <td scope="row">{{$userGroup->id_userGroup}}</td>
                     <td>{{Form::text('groupName', $userGroup->groupName,array('class'=>'form-control'))}}</td>

@@ -21,6 +21,7 @@
  *                      * users, global_user_groups, user_group
  *
  * Form: Deletes a global user role
+ *      Call: GET
  *      Route: admin/globla/destroy/{$id_user}/{$id_userGroup}/
  *      Controller: /app/Http/Controllers/admin/globalUserGroupController.php
  *      Function: globalUserGroupController@destroy

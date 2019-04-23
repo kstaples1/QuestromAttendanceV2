@@ -7,6 +7,27 @@
  * Date: 4/1/19
  * Time: 9:31 AM
  */
+
+/**
+ * Route: /admin/usergroup
+ *
+ * Controller: /app/Http/Controllers/admin/userGroupController.php
+ *
+ * Function: userGroupController@create
+ *
+ * Variables:
+ *      $userGroups
+ *          - Json from all user_groups
+ *              * this is displayed in the table
+ *
+ * Form: Edits a user group entry and updates it to the database
+ *      Call: Put
+ *      Route: /admin/usergroup/store
+ *      Controller: /app/Http/Controllers/admin/userGroupController.php
+ *      Function: userGroupController@store
+ *
+ */
+
 ?>
 
 
@@ -15,7 +36,7 @@
 
     {{ Breadcrumbs::render('create usergroup')}}
 
-        {!! Form::open (['method'=>'POST','action'=>['userGroupController@store']]) !!}
+        {!! Form::open (['method'=>'POST','action'=>['admin\userGroupController@store']]) !!}
     <div class="form-group">
         {{Form::label('groupName','Group Name: ','' )}}
         {{Form::text('groupName', "", array('class'=>'', 'style'=>''))}}

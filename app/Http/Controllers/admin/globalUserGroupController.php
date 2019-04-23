@@ -28,6 +28,8 @@ class globalUserGroupController extends Controller
     /**
      * Shows the page to create a global user group
      *
+     * Returns file: resources/views/admin/userGroup/globalUserCreate.blade.php
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -39,6 +41,8 @@ class globalUserGroupController extends Controller
 
     /**
      * Stores a new created global user group
+     *
+     *
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response

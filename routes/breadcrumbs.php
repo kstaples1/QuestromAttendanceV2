@@ -21,42 +21,42 @@ Breadcrumbs::for('admin', function ($trail) {
     // User Group
     Breadcrumbs::for('usergroup', function ($trail) {
         $trail->parent('admin');
-        $trail->push('User Group', route('usergroup.index'));
+        $trail->push('User Group', route('admin.usergroup.index'));
     });
 
     // Create Usergroup
     Breadcrumbs::for('create usergroup', function ($trail) {
         $trail->parent('usergroup');
-        $trail->push('Create', route('usergroup.create'));
+        $trail->push('Create', route('admin.usergroup.create'));
     });
 
     //global
     Breadcrumbs::for('global', function ($trail) {
         $trail->parent('admin');
-        $trail->push('Global User Group', route('global.index'));
+        $trail->push('Global User Group', route('admin.global.index'));
     });
 
     //Create Global
     Breadcrumbs::for('create global', function ($trail) {
         $trail->parent('global');
-        $trail->push('Create', route('global.create'));
+        $trail->push('Create', route('admin.global.create'));
     });
 
     //Master Courses
     Breadcrumbs::for('Master Courses', function ($trail) {
         $trail->parent('admin');
-        $trail->push('Courses', route('courses.index'));
+        $trail->push('Courses', route('admin.courses.index'));
     });
 
     //Master Courses Create
     Breadcrumbs::for('create master', function ($trail) {
         $trail->parent('Master Courses');
-        $trail->push('Create', route('courses.create'));
+        $trail->push('Create', route('admin.courses.create'));
     });
 
 // Professor
 Breadcrumbs::for('professor', function ($trail) {
-    $trail->parent('test');
+    //$trail->parent('test');
     $trail->push('Professor', route('professor.index'));
 });
 

@@ -7,14 +7,39 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
-## About Questrom Attendance
+# Questrom Attendance
 
 The Questrom Attendance app is used so that admins can create classes and professors can make sections for each class and students can take classes and take quizes created by professors.
 
-## Project Layout
+# Project Layout
 
 The project was make using Laravel which is a framework of PHP and uses a MVC or model view controller framework.
 
 ### Controllers
    Controllers are found under App/Http/Controllers and they facilitate the transfer of data from the database (model) and the front end (view).
-   
+
+
+# Routes
+
+#### /admin
+    Controller:
+        - location: app/Http/Controllers/dashboard.php
+        - function: dashboard@index
+        
+    File:
+        - resources/views/admin/index.blade.php
+#### /admin/global
+    Controller:
+        - location: app/Http/Controllers/admin/globalUserGroupController.php
+        - function: globalUserGroupController@index
+                
+    File:
+        - resources/views/admin/userGroup/globalUserGroup.blade.php
+
+#### /admin/global/create
+    Controller:
+        - location: app/Http/Controllers/admin/globalUserGroupController.php
+        - function: globalUserGroupController@create
+        
+    File:
+        - resources/views/admin/userGroup/globalUserCreate.blade.php
