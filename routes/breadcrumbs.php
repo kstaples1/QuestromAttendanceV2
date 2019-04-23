@@ -80,7 +80,7 @@ Breadcrumbs::for('professor', function ($trail) {
 
 // Student
 Breadcrumbs::for('student', function ($trail) {
-    $trail->parent('test');
+    //$trail->parent('test');
     $trail->push(\Illuminate\Support\Facades\Auth::user()->userName, route('student.index'));
 });
 

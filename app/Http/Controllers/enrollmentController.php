@@ -111,9 +111,9 @@ class enrollmentController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, $id_section)
+    public function destroy($id_section, $id_enrollment)
     {
-        $student = enrollment::find($id);
+        $student = enrollment::find($id_enrollment);
         $student->delete();
         return redirect()->to('professor/courses/'.$id_section.'/enrollment');
     }

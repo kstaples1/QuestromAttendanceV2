@@ -28,24 +28,24 @@ Route::get('/test','HomeController@test')->name('home');
 Route::get('/admin',[
     'as' => 'admin.index',
     'uses' => 'dashboardController@admin'
-]);
+])->middleware('admin');
 
 
 Route::resource('/admin/usergroup', 'admin\userGroupController', [
     'as'=> 'admin'
-]);
+])->middleware('admin');
 
 Route::resource('/admin/courses', 'admin\masterCoursesController', [
     'as'=> 'admin'
-]);
+])->middleware('admin');
 
 Route::resource('/admin/global','admin\globalUserGroupController', [
     'as'=> 'admin'
-]);
+])->middleware('admin');
 
 Route::get('/admin/global/destroy/{id_user}/{id_userGroup}', 'admin\globalUserGroupController@destroy', [
     'as'=> 'admin'
-]);
+])->middleware('admin');
 
 
 /********************** This is the professor routes **********************/
@@ -53,29 +53,46 @@ Route::get('/admin/global/destroy/{id_user}/{id_userGroup}', 'admin\globalUserGr
 Route::get('/professor',[
     'as' => 'professor.index',
     'uses' => 'dashboardController@professor'
-]);
+])->middleware('professor');
 
 Route::resource('/professor/courses','professor\semesterCoursesController', [
     'as'=> 'professor'
-]);
+])->middleware('professor');
 
 Route::resource('/professor/courses/{id_section}/enrollment','enrollmentController', [
     'as'=> 'professor'
-]);
+])->middleware('professor');
+
+Route::get('/professor/courses/{id_section}/enrollment/{id}/delete', 'enrollmentController@destroy');
+
 
 Route::resource('/professor/courses/{id_section}/quiz', 'professor\quizController', [
     'as'=> 'professor'
-]);
+])->middleware('professor');
 
-
-Route::resource('/professor/courses/{id_section}/question', 'questionController', [
+Route::resource('/professor/courses/{id_section}/question', 'professor\questionController', [
     'as'=> 'professor'
-]);
+])->middleware('professor');
 
-Route::resource('/professor/courses/{id_section}/option', 'optionsController', [
+Route::resource('/professor/courses/{id_section}/option', 'professor\optionsController', [
     'as'=> 'professor'
-]);
+])->middleware('professor');
 
+/********************** THIS IS WHERE THE STUDENT ROUTES ARE ***********************/
 
+Route::get('/student',[
+    'as' => 'student.index',
+    'uses' => 'dashboardController@student'
+])->middleware('student');
 
+Route::resource('/student/courses','student\studentController',[
+    'as'=>'student'
+])->middleware('student');
 
+Route::resource('/student/enroll','enrollmentController',[
+    'as'=>'student'
+])->middleware('student');
+
+Route::resource('/student/courses/{id_section}/quiz','student\student_answersController',[
+    'as' => 'student'
+])->middleware('student');

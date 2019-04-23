@@ -7,11 +7,29 @@
      * Date: 4/3/19
      * Time: 1:11 PM
      */
+
+    /**
+     * Route: /student/enroll
+     *
+     * Controller: /app/Http/Controllers/student/studentController.php
+     *
+     * Function: studentController@create
+     *
+     * Variables:
+     *      $classes
+     *          - All the classes the student is not enrolled in
+     *
+     * Form: Adds a student to a class
+     *      Call: POST
+     *      Route: /students/enroll
+     *      Controller: /app/Http/Controllers/enrollmentController.php
+     *      Function: enrollmentController@store
+     *
+     */
     ?>
 
     {{ Breadcrumbs::render('student enroll')}}
 
-    <a href="/student/courses/create" class="btn btn-success">Join Class</a>
     <br/>
     <br/>
     <table class="table">

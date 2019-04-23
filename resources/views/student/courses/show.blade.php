@@ -7,6 +7,23 @@
      * Date: 4/11/19
      * Time: 12:55 PM
      */
+/**
+ * Route: /student/courses/{id_section}
+ *
+ * Controller: /app/Http/Controllers/student/studentController.php
+ *
+ * Function: studentController@show
+ *
+ * Variables:
+ *      $quizzes
+ *          - Json of all the quizes for the enrolled class
+ *
+ *      $points
+ *          - User class points from enrollment table
+ *
+ *      $class
+ *          - The course details in a json
+ */
 ?>
     <br/>
     <br/>

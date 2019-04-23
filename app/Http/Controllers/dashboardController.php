@@ -13,7 +13,12 @@ class dashboardController extends Controller
 
     public function professor()
     {
-        return view('professor.index');
+        return redirect('/professor/courses');
+    }
+
+    public function student()
+    {
+        return redirect('/student/courses');
     }
 
 }

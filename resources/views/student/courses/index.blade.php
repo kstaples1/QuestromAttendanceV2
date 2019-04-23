@@ -7,6 +7,18 @@
  * Date: 4/2/19
  * Time: 6:52 PM
  */
+
+/**
+ * Route: /student/courses
+ *
+ * Controller: /app/Http/Controllers/student/studentController.php
+ *
+ * Function: studentController@index
+ *
+ * Variables:
+ *      $classes
+ *          - All the classes the student is enrolled in
+ */
 ?>
 
 {{ Breadcrumbs::render('student courses')}}

@@ -7,6 +7,39 @@
  * Date: 4/11/19
  * Time: 2:16 PM
  */
+
+/**
+ * Route: /student/courses/{id_section}/quiz/{id_quiz}
+ *
+ * Controller: /app/Http/Controllers/student/student_answersController.php
+ *
+ * Function: student_answersController@show
+ *
+ * Variables:
+ *      $quiz
+ *          - Gets the current quiz in json
+ *
+ *      $quizName
+ *          - Name of the quiz
+ *
+ *      $questions
+ *          - Get all questions that belong to the quiz
+ *
+ *      $points
+ *          - the user points for the class
+ *
+ *      $optionNum
+ *          - used to get the number of options for each question
+ *
+ *      $options
+ *          - All options that belong to the quiz
+ *
+ * Form: Creates a student answer in student_answers table
+ *      Call: POST
+ *      Route: /student/courses/{id_section}/quiz
+ *      Controller: /app/Http/Controllers/student/student_answersController.php
+ *      Function: student_answersController@store
+ */
 ?>
 
 <div class="jumbotron">
