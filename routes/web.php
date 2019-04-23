@@ -18,3 +18,18 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/test','HomeController@test')->name('home');
+
+
+/*************
+ *
+ * This is the admin routes
+ *
+ *************/
+
+Route::get('/admin',[
+    'as' => 'admin.index',
+    'uses' => 'admin\adminController@index'
+])->middleware('admin');
+
+Route::resource('/admin/global','admin\globalUserGroupController');
