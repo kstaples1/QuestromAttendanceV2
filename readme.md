@@ -7,6 +7,13 @@
 <a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
 </p>
 
+# TO DO 
+- Landing page
+- View Quizes
+
+
+
+
 # Questrom Attendance
 
 The Questrom Attendance app is used so that admins can create classes and professors can make sections for each class and students can take classes and take quizes created by professors.
@@ -43,3 +50,5 @@ The project was make using Laravel which is a framework of PHP and uses a MVC or
         
     File:
         - resources/views/admin/userGroup/globalUserCreate.blade.php
+        
+        

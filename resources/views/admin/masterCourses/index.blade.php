@@ -34,10 +34,10 @@
     <a href="/admin/courses/create" class="btn btn-success">Create</a>
     <br/>
     <br/>
-    <table class="table">
+    <table class="table table-responsive" >
         <thead>
         <tr>
-            <th scope="col">Master Course ID</th>
+
             <th scope="col">Department</th>
             <th scope="col">Course Number</th>
             <th scope="col">Course Title</th>
@@ -51,18 +51,42 @@
         @foreach($courses as $course)
             {!! Form::model($course, array('route' => ['admin.courses.update', $course->id_master], 'method'=>'put')) !!}
             <tr>
-                <td scope="row">{{$course->id_master}}</td>
-                <td>{{Form::text('courseDepartment', $course->courseDepartment,array('class'=>'form-control'))}}</td>
-                <td>{{Form::number('courseNumber', $course->courseNumber,array('class'=>'form-control'))}}</td>
-                <td>{{Form::text('classTitle', $course->classTitle,array('class'=>'form-control'))}}</td>
-                <td>{{Form::text('description', $course->description,array('class'=>'form-control'))}}</td>
+                <td style="display:none" class="full_{{$course->id_master}}" >{{Form::text('courseDepartment', $course->courseDepartment,array('class'=>'form-control'))}}</td>
+                <td class="summary_{{$course->id_master}}">{{$course->courseDepartment}}</td>
+
+                <td style="display:none" class="full_{{$course->id_master}}">{{Form::number('courseNumber', $course->courseNumber,array('class'=>'form-control'))}}</td>
+                <td class="summary_{{$course->id_master}}">{{$course->courseNumber}}</td>
+
+                <td style="display:none" class="full_{{$course->id_master}}"> {{Form::text('classTitle', $course->classTitle,array('class'=>'form-control'))}}</td>
+                <td class="summary_{{$course->id_master}}">{{$course->classTitle}}</td>
+
+                <td style="display:none" class="full_{{$course->id_master}}" style="">{{Form::textarea('description', $course->description,array('class'=>'form-control'))}}</td>
+                <td class="summary_{{$course->id_master}}" >{{$course->description}}</td>
+
                 <td>{{$course->created_at}}</td>
                 <td>{{$course->updated_at}}</td>
-                <td>{{Form::button("Update", array('class'=>'btn btn-success', 'type'=>'submit', 'title'=>'Update', 'data-placement'=>'top', 'data-toggle'=>'tooltip'))}}</td>
+
+                <td style="display:none" class="full_{{$course->id_master}}">
+                            {{Form::button("Update", array('class'=>'btn btn-success', 'type'=>'submit', 'title'=>'Update', 'data-placement'=>'top', 'data-toggle'=>'tooltip'))}}
+                            <br/><br/><a id="toggle" style="color:#FFF" class="btn btn-danger" onclick="toggleDisplay({{$course->id_master}})">Cancel</a>
+                </td>
+
+                <td class="summary_{{$course->id_master}}"><a id="toggle" style="color:#FFF" class="btn btn-primary" onclick="toggleDisplay({{$course->id_master}})">Edit</a></td>
             </tr>
             {!! Form::close() !!}
         @endforeach
         </tbody>
     </table>
+    <script>
+        function toggleDisplay(id){
+            if($(".summary_"+id).css('display') == 'none'){
+                $(".summary_"+id).show();
+                $(".full_"+id).hide();
+            }else{
+                $(".summary_"+id).hide();
+                $(".full_"+id).show();
+            }
+        }
+    </script>
 @stop
 

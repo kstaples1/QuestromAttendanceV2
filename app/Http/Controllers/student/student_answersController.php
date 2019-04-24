@@ -137,8 +137,11 @@ class student_answersController extends Controller
                 $answer->answer = $req[$key];
 
             }elseif (substr($key,0,3)=="MC_"){
-                $answer->id_question = substr($key,strpos($key,"_",3)+1);
-                $answer->id_option = substr($key,strpos($key,"_")+1);
+                $option_position = strpos($key,"_")+1;
+                $question_position = strpos($key,"_",3)+1;
+                
+                $answer->id_question = substr($key,$question_position);
+                $answer->id_option = substr($key, $option_position, $question_position-$option_position-1);
             }
             else{
                 $answer->id_question = $key;

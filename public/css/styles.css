@@ -1,0 +1,36 @@
+.admin-bg {
+    background:url('https://images.unsplash.com/3/doctype-hi-res.jpg?ixlib=rb-1.2.1&auto=format&fit=crop&w=1946&q=80') fixed center no-repeat;
+
+    color:#FFF;
+
+    -webkit-background-size: cover;
+
+    -moz-background-size: cover;
+
+    -o-background-size: cover;
+
+    background-size:cover;
+}
+
+.vertical-center {
+    padding-top:20vh;
+    color:#fff;
+}
+
+.box-padding{
+    padding:10%;
+}
+
+.bg-box{
+    background-color:rgba(0,0,0,0.8);
+}
+
+.list{
+    text-decoration: none;
+    color:inherit;
+}
+
+.list:hover{
+    text-decoration: none;
+    color:inherit;
+}

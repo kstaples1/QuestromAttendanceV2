@@ -17,6 +17,11 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
+
+    <!-- JQuery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js" type="text/javascript"></script>
+
 </head>
 <body>
     <div id="app">
@@ -49,6 +54,13 @@
                                 </li>
                             @endif
                         @else
+                            @if(\Illuminate\Support\Facades\Auth::user()->user_groups()->orderby('priorityLevel')->first()->groupName == "Admin")
+                                @include('includes.admin_nav')
+                            @elseif(\Illuminate\Support\Facades\Auth::user()->user_groups()->orderby('priorityLevel')->first()->groupName == "professor")
+                                @include('includes.professor_nav')
+                            @else
+                                @include('includes.student_nav')
+                            @endif
                             <li class="nav-item">
                                 <a class="nav-link" href="{{ route('logout') }}"
                                    onclick="event.preventDefault();
@@ -65,7 +77,7 @@
                 </div>
             </div>
         </nav>
-
+            @yield('noContainer')
         <div class="container">
             @yield('content')
         </div>
