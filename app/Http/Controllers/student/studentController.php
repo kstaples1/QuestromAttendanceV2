@@ -49,6 +49,7 @@ class studentController extends Controller
             ->whereNotIn('id_section',function($query){
                 $query->select('id_section')->from('enrollment')->where('id_user','=', Auth::user()->id_user);
             })
+            ->where('isActive','=','1')
             ->get();
         $open = semester_courses::query()
             ->leftJoin('master_courses','semester_courses.id_master','=','master_courses.id_master')

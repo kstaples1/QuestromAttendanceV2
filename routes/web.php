@@ -15,13 +15,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/professor/courses/{id_section}/view','professor\semesterCoursesController@viewClass');
 
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/test','HomeController@test')->middleware('admin');
+Route::get('/test', [
+    'as'=> 'test',
+    'uses'=>'HomeController@test'
+])->middleware('admin');
 
 
 /********************** This is the admin routes **********************/

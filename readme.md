@@ -9,10 +9,13 @@
 
 # TO DO 
 - Landing page
-- View Quizes
 - output pretty json //return response()->json($options,200 ,[],JSON_PRETTY_PRINT);
 
-
+- user preferences
+- Side nav bar active class
+- Dashboard: Users
+- Dashboard: Professors
+- Ajax load
 
 # Questrom Attendance
 

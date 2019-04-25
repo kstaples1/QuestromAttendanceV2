@@ -11,6 +11,7 @@ use App\user_groups;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use App\quiz;
 
 class semesterCoursesController extends Controller
 {
@@ -101,15 +102,26 @@ class semesterCoursesController extends Controller
         $course->defaultPoints = $request->defaultPoints;
         $course->semester = $request->semester;
         $course->year = $request->year;
+        $course->isActive = $request->isActive;
         $course->can_view_points = $request->can_view_points;
 
-        if($course->save()){
+        if($course->update()){
             return redirect()->to('professor/courses');
         }else{
             return "Failed";
         }
     }
 
+    public function viewClass($id_section)
+    {
+        $courseData = semester_courses::where('id_section','=',$id_section)->with('master_courses')->first();
+        $course = $courseData->master_courses->courseDepartment." ".$courseData->master_courses->courseNumber." ".$courseData->courseSection;
+        $quizes = quiz::where('id_section','=',$id_section)->get();
+        $students = enrollment::where('id_section','=',$id_section)->with('users')->with('userGroup')->get();
+        $roles = user_groups::pluck('groupName','id_userGroup');
+
+        return view('professor.semester_courses.class')->with('students', $students)->with('roles',$roles)->with('course',$course)->with('quizes',$quizes)->with('id_section',$id_section);
+    }
     /**
      * Remove the specified resource from storage.
      *

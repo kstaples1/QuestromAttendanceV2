@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('courses')}}
+@stop
 @section('content')
     <?php
     /**
@@ -29,52 +32,86 @@
      */
     ?>
 
-    {{ Breadcrumbs::render('courses')}}
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <script src="http://demo.itsolutionstuff.com/plugin/jquery.js"></script>
-    <a href="/professor/courses/create" class="btn btn-success">Create</a>
-    <br/>
-    <br/>
     <div class="row">
-        <table class="table table-responsive">
-            <thead>
-            <tr>
-                <th scope="col">Course</th>
-                <th scope="col">Course Title</th>
-                <th scope="col">Course Section</th>
-                <th scope="col">Semester</th>
-                <th scope="col">Year</th>
-                <th scope="col">Default Points</th>
-                <th scope="col">Class Points</th>
-                <th scope="col">Is Cancelled</th>
-                <th scope="col">Update Changes</th>
-                <th scope="col">View Class</th>
-                <th scope="col">View Quizes</th>
-                <th scope="col">Updated At</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($courses as $course)
-                {!! Form::model($course, array('route' => ['professor.courses.update', $course->id_section], 'method'=>'put')) !!}
-                <tr>
-                    <td>{{$course->courseDepartment}} {{$course->courseNumber}}</td>
-                    <td>{{$course->classTitle}}</td>
-                    <td>{{Form::text('courseSection', $course->courseSection,array('class'=>'form-control'))}}</td>
-                    <td>{{Form::select('semester', array('Fall' => 'Fall', 'Spring' => 'Spring', 'Summer' => 'Summer'),$course->semester)}}</td>
-                    <td>{{Form::number('year', $course->year,array('class'=>'form-control'))}}</td>
-                    <td>{{Form::number('defaultPoints', $course->defaultPoints,array('class'=>'form-control'))}}</td>
-                    <td>{{Form::select('can_view_points', array('1' => 'Visible', '0' => 'Hidden'),$course->can_view_points)}}</td>
-                    <td>{{Form::checkbox('isCancelled', $course->isCancelled)}}</td>
-                    <td>{{Form::button("Update", array('class'=>'btn btn-success update', 'type'=>'submit', 'title'=>'Update', 'data-placement'=>'top', 'data-toggle'=>'tooltip'))}}</td>
-                    <td><a href="/professor/courses/{{$course->id_section}}/enrollment" class="btn btn-primary">View</a></td>
-                    <td><a href="/professor/courses/{{$course->id_section}}/quiz" class="btn btn-primary">View</a></td>
-                    <td>{{$course->updated_at}}</td>
-                </tr>
-                {!! Form::close() !!}
-            @endforeach
-            </tbody>
-        </table>
+        <div class="col-md-12">
+            <!-- DATA TABLE -->
+            <h3 class="title-5 m-b-35">My Courses</h3>
+            <div class="table-data__tool">
+                <div class="table-data__tool-left">
+                    <a href="/professor/courses/create" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                        <i class="zmdi zmdi-plus"></i>Create
+                    </a>
+                </div>
+            </div>
+            <div class="table-responsive table-responsive-data2">
+                <table class="table table-data2">
+                    <thead>
+                    <tr>
+                        <th>Course</th>
+                        <th>Course Title</th>
+                        <th>Course Section</th>
+                        <th>Semester</th>
+                        <th>Year</th>
+                        <th>Default Points</th>
+                        <th>Class Points</th>
+                        <th>Is Active</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    @foreach($courses as $course)
+                        {!! Form::model($course, array('route' => ['professor.courses.update', $course->id_section], 'method'=>'put')) !!}
+                        <tr class="tr-shadow">
+                            <td style="display:none"></td>
+                            <td>{{$course->courseDepartment}} {{$course->courseNumber}}</td>
+                            <td>{{$course->classTitle}}</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}"> {{Form::text('courseSection', $course->courseSection,array('class'=>'form-control'))}}</td>
+                            <td class="summary_{{$course->id_master}}">{{$course->courseSection}}</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}" style="">{{Form::select('semester', array('Fall' => 'Fall', 'Spring' => 'Spring', 'Summer' => 'Summer'),$course->semester)}}</td>
+                            <td class="summary_{{$course->id_master}}" >{{$course->semester}}</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}" style="">{{Form::number('year', $course->year,array('class'=>'input-form-number','style'=>'width:200%'))}}</td>
+                            <td class="summary_{{$course->id_master}}" >{{$course->year}}</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}" style=""> {{Form::number('defaultPoints', $course->defaultPoints,array('class'=>'input-form-number'))}}</td>
+                            <td class="summary_{{$course->id_master}}" >{{$course->defaultPoints}}</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}" style=""> {{Form::select('can_view_points', array('1' => 'Visible', '0' => 'Hidden'),$course->can_view_points)}}</td>
+                            <td class="summary_{{$course->id_master}}" >@if($course->can_view_points == 1)Visible @else Hidden @endif</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}" style=""> {{Form::select('isActive', array('1' => 'Active', '0' => 'Not Active'),$course->isActive)}}</td>
+                            <td class="summary_{{$course->id_master}}" >@if($course->isActive == 1)Active @else Not Active @endif</td>
+
+                            <td style="display:none" class="full_{{$course->id_master}}">
+                                {{Form::button("Update", array('class'=>'btn btn-success', 'type'=>'submit', 'title'=>'Update', 'data-placement'=>'top', 'data-toggle'=>'tooltip'))}}
+                                <br/><br/><a href="#" id="toggle" style="color:#FFF" class="btn btn-danger" onclick="toggleDisplay({{$course->id_master}})">Cancel</a>
+                            </td>
+
+                            <td class="summary_{{$course->id_master}}">
+                                <a href="#" id="toggle" style="color:#FFF" class="btn btn-primary" onclick="toggleDisplay({{$course->id_master}})">Edit</a>
+                                <br/><br/><a href="/professor/courses/{{$course->id_section}}/view" class="btn btn-secondary">View</a>
+                            </td>
+                        </tr>
+                        {!! Form::close() !!}
+                        <tr class="spacer"></tr>
+                    @endforeach
+                    </tbody>
+                </table>
+            </div>
+            <!-- END DATA TABLE -->
+        </div>
     </div>
-
-
+    <script>
+        function toggleDisplay(id){
+            if($(".summary_"+id).css('display') == 'none'){
+                $(".summary_"+id).show();
+                $(".full_"+id).hide();
+            }else{
+                $(".summary_"+id).hide();
+                $(".full_"+id).show();
+            }
+        }
+    </script>
 @stop

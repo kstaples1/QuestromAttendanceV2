@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.admin')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('usergroup')}}
+    @stop
 @section('content')
     <?php
     /**

@@ -1,6 +1,9 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('admin')}}
+    @stop
 
-@section('noContainer')
+@section('content')
 <?php
 /**
  * Created by PhpStorm.
@@ -8,29 +11,100 @@
  * Date: 4/1/19
  * Time: 8:48 AM
  */
+
+/**
+ * Route: /admin
+ *
+ * Controller: /app/Http/Controllers/dashboardController.php
+ *
+ * Function: dashboardController.php@admin
+ *
+ * Variables:
+ *      $admins
+ *          - All admins
+ *      $users
+ *          - All users
+ */
+//Lazy coder counting
+$counter = 0;
+$counter2 = 0;
 ?>
-<div class="container-fluid admin-bg" style="height:93vh;">
-    <div class="row text-center">
-        <div class="col-10 offset-1 vertical-center">
-            <div class="bg-box">
-                <div class="row box-padding">
-                    <div class="col-4">
-                        <h2 class="border-bottom">ADMIN</h2>
-                        <br/>
-                        <p><a href="/admin/courses" class="list">Master Courses</a></p>
-                        <p><a href="/admin/global" class="list">View/Edit User Groups</a></p>
-                        <p><a href="/admin/usergroup" class="list">Assign Roles</a></p>
-                    </div>
-                    <div class="col-4">
-                        <h2 class="border-bottom">PROFESSOR</h2>
-                        <br/>
-                        <p><a href="/professor" class="list">Manage Classes</a></p>
-                    </div>
-                    <div class="col-4">
-                        <h2 class="border-bottom">STUDENT</h2>
-                        <br/>
-                        <p><a href="/student" class="list">View My Classes</a></p>
-                    </div>
+<div class="row">
+    <!-- Admins -->
+    <div class="col-lg-6">
+        <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+            <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                <div class="bg-overlay bg-overlay--blue"></div>
+                <h3>
+                    <i class="zmdi zmdi-account"></i>Admins</h3>
+            </div>
+            <div class="au-task js-list-load">
+                <div class="au-task-list js-scrollbar3">
+                    @foreach($admins as $admin)
+                        @if($counter < 4)
+                            <div class="au-task__item au-task__item--success">
+                                <div class="au-task__item-inner">
+                                    <h5 class="time">
+                                        {{$admin->firstName}} {{$admin->lastName}}
+                                    </h5>
+                                    <span class="small">{{$admin->email}}</span>
+                                </div>
+                            </div>
+                        @else
+                            <div class="au-task__item au-task__item--danger js-load-item">
+                                <div class="au-task__item-inner">
+                                    <h5 class="task">
+                                        <a href="#">Meeting about plan for Admin Template 2018</a>
+                                    </h5>
+                                    <span class="time">10:00 AM</span>
+                                </div>
+                            </div>
+                        @endif
+                        @php $counter++; @endphp
+                    @endforeach
+                </div>
+                <div class="au-task__footer">
+                    <button class="au-btn au-btn-load js-load-btn">load more</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Users -->
+    <div class="col-lg-6">
+        <div class="au-card au-card--no-shadow au-card--no-pad m-b-40">
+            <div class="au-card-title" style="background-image:url('images/bg-title-01.jpg');">
+                <div class="bg-overlay bg-overlay--blue"></div>
+                <h3>
+                    <i class="zmdi zmdi-account"></i>Users</h3>
+            </div>
+            <div class="au-task js-list-load">
+                <div class="au-task-list js-scrollbar3">
+                    @foreach($users as $user)
+                        @if($counter2 < 4)
+                            <div class="au-task__item au-task__item--primary">
+                                <div class="au-task__item-inner">
+                                    <h5 class="time">
+                                        {{$user->firstName}} {{$user->lastName}}
+                                    </h5>
+                                    <span class="small">{{$user->email}}</span>
+                                </div>
+                            </div>
+                        @else
+                            <div class="au-task__item au-task__item--danger js-load-item">
+                                <div class="au-task__item-inner">
+                                    <h5 class="task">
+                                        <a href="#">Meeting about plan for Admin Template 2018</a>
+                                    </h5>
+                                    <span class="time">10:00 AM</span>
+                                </div>
+                            </div>
+                        @endif
+                        @php $counter2++; @endphp
+                    @endforeach
+                </div>
+                <div class="au-task__footer">
+                    <button class="au-btn au-btn-load js-load-btn">load more</button>
                 </div>
             </div>
         </div>

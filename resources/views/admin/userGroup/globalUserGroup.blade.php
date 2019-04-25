@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('global')}}
+    @stop
 @section('content')
 <?php
 /**
@@ -28,35 +31,47 @@
  */
 ?>
 
-{{ Breadcrumbs::render('global')}}
 
-<a href="/admin/global/create" class="btn btn-success">Create</a>
-<br/>
-<br/>
-<table class="table">
-    <thead>
-    <tr>
-        <th scope="col">User Name</th>
-        <th scope="col">Group Name</th>
-        <th scope="col">Created At</th>
-        <th scope="col">Updated At</th>
-        <th scope="col"></th>
-    </tr>
-    </thead>
-    <tbody>
-    @foreach($globalUsers as $globalUser)
-        <tr>
-            <td scope="row">{{$globalUser->userName}}</td>
-            <td>{{$globalUser->groupName}}</td>
-            <td>{{$globalUser->created_at}}</td>
-            <td>{{$globalUser->updated_at}}</td>
-            <td>
-                {!! Form::open(['url'=>['admin/global/destroy/'.$globalUser->id_user.'/'.$globalUser->id_userGroup.'/'],'method'=>'get'])!!}
-                {{Form::button('Delete',array('class'=>'btn btn-danger', 'type'=>'submit', 'title'=>'Delete', 'data-toggle'=>'tooltip'))}}
-                {!! Form::close() !!}
-            </td>
-        </tr>
-    @endforeach
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        <!-- DATA TABLE -->
+        <h3 class="title-5 m-b-35">User Roles</h3>
+        <div class="table-data__tool">
+            <div class="table-data__tool-left">
+                <a href="/admin/global/create" class="au-btn au-btn-icon au-btn--green au-btn--small">
+                    <i class="zmdi zmdi-plus"></i>Create
+                </a>
+            </div>
+        </div>
+        <div class="table-responsive table-responsive-data2">
+            <table class="table table-data2">
+                <thead>
+                    <tr>
+                        <th>User Name</th>
+                        <th>Group Name</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach($globalUsers as $globalUser)
+                        <tr class="tr-shadow">
+                            <td>{{$globalUser->userName}}</td>
+                            <td>{{$globalUser->groupName}}</td>
+                            <td>{{$globalUser->created_at}}</td>
+                            <td>{{$globalUser->updated_at}}</td>
+                            <td>
+                                {!! Form::open(['url'=>['admin/global/destroy/'.$globalUser->id_user.'/'.$globalUser->id_userGroup.'/'],'method'=>'get'])!!}
+                                {{Form::button('Delete',array('class'=>'btn btn-danger', 'type'=>'submit', 'title'=>'Delete', 'data-toggle'=>'tooltip'))}}
+                                {!! Form::close() !!}
+                            </td>
+                        </tr>
+                        <tr class="spacer"></tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 @stop

@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('create course')}}
+@stop
 @section('content')
     <?php
 /**
@@ -25,7 +28,7 @@
 
     <div class="container">
 
-        {{ Breadcrumbs::render('create course')}}
+
         <div class="row">
             <div class="offset-2 col-10">
                 <div class="jumbotron col-10">
