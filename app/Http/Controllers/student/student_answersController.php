@@ -13,6 +13,7 @@ use App\student_answers;
 use Illuminate\Support\Facades\Auth;
 use App\enrollment;
 use Illuminate\Support\Facades\DB;
+use App\question_answers;
 
 class student_answersController extends Controller
 {
@@ -62,6 +63,30 @@ class student_answersController extends Controller
         }
     }
 
+    public function viewAnswers($id_section, $id_quiz)
+    {
+        $quiz = quiz::find($id_quiz)->master_courses();
+        $quizName = quiz::find($id_quiz);
+        $questions = question::where('question.id_quiz','=',$id_quiz)->join('quiz','quiz.id_quiz','=','question.id_quiz')->where('quiz.id_section','=',$id_section)->get();
+
+        /*
+        $options = question::select('question.id_question', 'question.question_label','question_label','question_type','option','isCorrect','options.id_option','student_answers.id_option as studentAnswer','bet')
+            ->where('id_quiz','=',$id_quiz)
+            ->leftjoin('options','question.id_question','=','options.id_question')
+            ->leftjoin('student_answers','student_answers.id_option','=','options.id_option')
+            ->get();
+        */
+        //return $options;
+
+        $options = question_answers::where('id_quiz','=',$id_quiz)->get();
+        return view('student.quiz.view')
+            ->with('questions',$questions)
+            ->with('quiz',$quiz)
+            ->with('quizName',$quizName)
+            ->with('options',$options);
+
+        //return response()->json($options,200 ,[],JSON_PRETTY_PRINT);
+    }
     /**
      * Display a listing of the resource.
      *
@@ -139,7 +164,7 @@ class student_answersController extends Controller
             }elseif (substr($key,0,3)=="MC_"){
                 $option_position = strpos($key,"_")+1;
                 $question_position = strpos($key,"_",3)+1;
-                
+
                 $answer->id_question = substr($key,$question_position);
                 $answer->id_option = substr($key, $option_position, $question_position-$option_position-1);
             }

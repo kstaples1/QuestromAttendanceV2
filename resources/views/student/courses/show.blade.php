@@ -68,7 +68,7 @@
                 </td>
                 <td>
                     @if($quiz->taken > 0)
-                        <a class="btn btn-success" href="#">View answer</a>
+                        <a class="btn btn-success" href="/student/courses/{{$quiz->id_section}}/quiz/view/{{$quiz->id_quiz}}">View answer</a>
                     @else
                         <a class="btn btn-primary" href="/student/courses/{{$quiz->id_section}}/quiz/{{$quiz->id_quiz}}">Take Quiz</a>
                     @endif

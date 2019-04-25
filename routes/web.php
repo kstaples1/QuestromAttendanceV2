@@ -97,3 +97,5 @@ Route::resource('/student/enroll','enrollmentController',[
 Route::resource('/student/courses/{id_section}/quiz','student\student_answersController',[
     'as' => 'student'
 ])->middleware('student');
+
+Route::get('/student/courses/{id_section}/quiz/view/{id_quiz}', 'student\student_answersController@viewAnswers');
