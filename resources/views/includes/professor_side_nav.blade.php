@@ -1,3 +1,11 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: Kyle_Staples
+ * Date: 4/25/19
+ * Time: 4:35 PM
+ */
+?>
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="/">
@@ -9,25 +17,6 @@
             <ul class="list-unstyled navbar__list">
                 <li class="active has-sub">
                     <a class="js-arrow" href="#">
-                        <i class="fas fa-group"></i>Admin</a>
-                    <ul class="list-unstyled navbar__sub-list js-sub-list">
-                        <li class="active">
-                            <a href="{{url('/admin')}}">Dashboard</a>
-                        </li>
-                        <li>
-                            <a href="{{url('/admin/courses')}}">Master Courses</a>
-                        </li>
-                        <li>
-                            <a href="{{url('/admin/global')}}">Global User Groups</a>
-                        </li>
-                        <li>
-                            <a href="{{url('/admin/usergroup')}}">User Groups</a>
-                        </li>
-                    </ul>
-                </li>
-
-                <li class="has-sub">
-                    <a class="js-arrow" href="#">
                         <i class="fas fa-book"></i>Professor</a>
                     <ul class="list-unstyled navbar__sub-list js-sub-list">
                         <li>
@@ -38,14 +27,6 @@
                         </li>
                     </ul>
                 </li>
-
-               <!-- <li>
-                    <a href="map.html">
-                        <i class="fas fa-map-marker-alt"></i>Maps</a>
-                </li>-->
-
-
-
                 <li class="has-sub">
                     <a class="js-arrow" href="#">
                         <i class="fas fa-male"></i>Student</a>

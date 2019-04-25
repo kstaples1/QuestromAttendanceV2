@@ -15,9 +15,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/professor/courses/{id_section}/view','professor\semesterCoursesController@viewClass');
-
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
@@ -82,6 +79,8 @@ Route::resource('/professor/courses/{id_section}/question', 'professor\questionC
 Route::resource('/professor/courses/{id_section}/option', 'professor\optionsController', [
     'as'=> 'professor'
 ])->middleware('professor');
+
+Route::get('/professor/courses/{id_section}/view','professor\semesterCoursesController@viewClass')->middleware('professor');
 
 /********************** THIS IS WHERE THE STUDENT ROUTES ARE ***********************/
 

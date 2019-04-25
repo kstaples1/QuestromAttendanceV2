@@ -49,7 +49,13 @@ $email = \Illuminate\Support\Facades\Auth::user()->email;
     <!-- END HEADER MOBILE-->
 
     <!-- MENU SIDEBAR-->
-    @include('includes.side_nav')
+    @if(\Illuminate\Support\Facades\Auth::user()->user_groups()->orderby('priorityLevel')->first()->groupName == "Admin")
+        @include('includes.admin_side_nav')
+    @elseif(\Illuminate\Support\Facades\Auth::user()->user_groups()->orderby('priorityLevel')->first()->groupName == "Professor")
+        @include('includes.professor_side_nav')
+    @else
+        @include('includes.student_side_nav')
+    @endif
     <!-- END MENU SIDEBAR-->
 
     <!-- PAGE CONTAINER-->
