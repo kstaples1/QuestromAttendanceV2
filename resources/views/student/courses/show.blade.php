@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('student course', $class->master_courses->courseDepartment." ".$class->master_courses->courseNumber." ".$class->courseSection)}}
+@stop
 @section('content')
 <?php
     /**
@@ -25,57 +28,62 @@
  *          - The course details in a json
  */
 ?>
-    <br/>
-    <br/>
 
-@if($class->can_view_points == 1)
-    <h1>My Points:
-        <br/>
-        {{$points->class_points}}
-    </h1>
 
-@else
-    <h1>My Points:
-        <br/>
-    </h1>
-    <h2 class="text-danger">
-        ** Points hidden by professor
-    </h2>
+<div class="user-data m-b-30">
+    <h3 class="title-3 m-b-30">
+        <i class="zmdi zmdi-assignment"></i>{{$class->master_courses->courseDepartment}} {{$class->master_courses->courseNumber}} {{$class->courseSection}}</h3>
+    <div class="filters m-b-45">
+        @if($class->can_view_points == 1)
+            <h5>My Points:
+                <br/>
+                {{$points->class_points}}
+            </h5>
 
-@endif
+        @else
+            <h5 class="title-5">My Points:
+                <br/>
+            </h5>
+            <p class="text-danger">
+                ** Points hidden by professor
+            </p>
 
-    <br/>
-    <br/>
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Quiz Id</th>
-            <th scope="col">Quiz Title</th>
-            <th scope="col">Quiz Status</th>
-            <th scope="col">Options</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($quizes as $quiz)
+        @endif
+    </div>
+    <div class="table-responsive table-data" style="height:auto;">
+        <table class="table">
+            <thead>
             <tr>
-                <td>{{$quiz->id_quiz}}</td>
-                <td>{{$quiz->title}}</td>
-                <td>@if($quiz->isOpen == 1)
-                        Open
-                    @else
-                        Closed
-                    @endif
-                </td>
-                <td>
-                    @if($quiz->taken > 0)
-                        <a class="btn btn-success" href="/student/courses/{{$quiz->id_section}}/quiz/view/{{$quiz->id_quiz}}">View answer</a>
-                    @else
-                        <a class="btn btn-primary" href="/student/courses/{{$quiz->id_section}}/quiz/{{$quiz->id_quiz}}">Take Quiz</a>
-                    @endif
-                </td>
+                <td>Quiz Id</td>
+                <td>Quiz Title</td>
+                <td>Quiz Status</td>
+                <td>Options</td>
             </tr>
-        @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            @foreach($quizes as $quiz)
+                <tr>
+                    <td>{{$quiz->id_quiz}}</td>
+                    <td>{{$quiz->title}}</td>
+                    <td>@if($quiz->isOpen == 1)
+                            Open
+                        @else
+                            Closed
+                        @endif
+                    </td>
+                    <td>
+                        @if($quiz->taken > 0)
+                            <a class="btn btn-success" href="/student/courses/{{$quiz->id_section}}/quiz/view/{{$quiz->id_quiz}}">View answer</a>
+                        @else
+                            <a class="btn btn-primary" href="/student/courses/{{$quiz->id_section}}/quiz/{{$quiz->id_quiz}}">Take Quiz</a>
+                        @endif
+                    </td>
+                </tr>
+            @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>
+
 
 @stop

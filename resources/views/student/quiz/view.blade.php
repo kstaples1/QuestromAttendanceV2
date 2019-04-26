@@ -1,4 +1,7 @@
-@extends('layouts.app')
+@extends('layouts.dashboard')
+@section('breadcrumb')
+    {{ Breadcrumbs::render('student course', $class->master_courses->courseDepartment." ".$class->master_courses->courseNumber." ".$class->courseSection)}}
+    @stop
 @section('content')
     <?php
 /**

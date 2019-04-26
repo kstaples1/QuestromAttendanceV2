@@ -89,7 +89,7 @@ class studentController extends Controller
             ->where('quiz.id_section','=', $id)
             ->where('isOpen','=','1')
             ->get();
-        $class = semester_courses::find($id);
+        $class = semester_courses::find($id)->with('master_courses')->first();
         foreach($quizes as $quiz){
             $take = student_answers::where('id_user','=',Auth::user()->id_user)
                 ->leftJoin('question','student_answers.id_question','=','question.id_question')

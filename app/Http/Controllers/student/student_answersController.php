@@ -42,7 +42,7 @@ class student_answersController extends Controller
         $options = question::where('id_quiz','=',$id_quiz)
             ->leftjoin('options','question.id_question','=','options.id_question')
             ->get();
-
+        $class = semester_courses::find($id_section)->with('master_courses')->first();
         // Get the number of options per question.
         $optionNum = question::select(DB::Raw('question.id_question, count(*) as count'))->join('options','options.id_question','=','question.id_question')->groupby('question.id_question')->get();
 
@@ -59,7 +59,8 @@ class student_answersController extends Controller
                 ->with('quizName',$quizName)
                 ->with('options',$options)
                 ->with('points',$points)
-                ->with('optionNum',$optionNum);
+                ->with('optionNum',$optionNum)
+                ->with('class',$class);
         }
     }
 
@@ -68,7 +69,7 @@ class student_answersController extends Controller
         $quiz = quiz::find($id_quiz)->master_courses();
         $quizName = quiz::find($id_quiz);
         $questions = question::where('question.id_quiz','=',$id_quiz)->join('quiz','quiz.id_quiz','=','question.id_quiz')->where('quiz.id_section','=',$id_section)->get();
-
+        $class = semester_courses::find($id_section)->with('master_courses')->first();
         /*
         $options = question::select('question.id_question', 'question.question_label','question_label','question_type','option','isCorrect','options.id_option','student_answers.id_option as studentAnswer','bet')
             ->where('id_quiz','=',$id_quiz)
@@ -83,7 +84,8 @@ class student_answersController extends Controller
             ->with('questions',$questions)
             ->with('quiz',$quiz)
             ->with('quizName',$quizName)
-            ->with('options',$options);
+            ->with('options',$options)
+            ->with('class',$class);
 
         //return response()->json($options,200 ,[],JSON_PRETTY_PRINT);
     }

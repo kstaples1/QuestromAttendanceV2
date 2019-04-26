@@ -90,6 +90,12 @@ Breadcrumbs::for('student', function ($trail) {
         $trail->push('My Courses', route('student.courses.index'));
     });
 
+    // Class
+    Breadcrumbs::for('student course', function ($trail, $course) {
+        $trail->parent('student courses');
+        $trail->push($course, route('student.courses.index'));
+    });
+
     // Enroll
     Breadcrumbs::for('student enroll', function ($trail) {
         $trail->parent('student courses');
